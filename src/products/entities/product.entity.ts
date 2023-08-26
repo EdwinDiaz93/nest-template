@@ -1,9 +1,10 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { ProductImage } from "./";
+import { User } from "src/auth/entities/user.entity";
 
 
 @Entity({
-    name:'products'
+    name: 'products'
 })
 export class Product {
     @PrimaryGeneratedColumn('uuid')
@@ -60,6 +61,12 @@ export class Product {
     )
     images?: ProductImage[];
 
+    @ManyToOne(
+        () => User,
+        (user: User) => user.products,
+        { eager: true },
+    )
+    user: User
 
 
     @BeforeInsert()
