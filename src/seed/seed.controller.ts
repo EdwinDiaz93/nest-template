@@ -1,16 +1,16 @@
 import { Controller, Get } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger'
 import { SeedService } from './seed.service';
-import { Auth } from 'src/auth/decorators';
-import { validRols } from 'src/auth/interfaces/valid-rols.enum';
 
 @Controller('seed')
+@ApiTags('Seed')
 export class SeedController {
   constructor(private readonly seedService: SeedService) { }
 
   @Get()
-  runSeed() {    
+  runSeed() {
     return this.seedService.runSeed()
   }
- 
+
 
 }
